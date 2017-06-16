@@ -1,8 +1,24 @@
-.tableDropdown{
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 50px;
-    right: 0;
-    z-index: 999;
+.tabelInerContainer{
+    position: relative;
+    .tableDropdown{
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 20px;
+        right: 10px;
+        z-index: 999;
+        
+    }
+}
+
+.tableDropContainer{
+    width: 100px;
+    background-color: white;
+    >li{
+        padding: 5px;
+        &:hover{
+            background-color: pink;
+        }
+        cursor: hand;
+    }        
 }
