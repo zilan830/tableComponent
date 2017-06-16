@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { RequestAction } from "../web_modules/actions";
 
 const mapStateToProps = (state, oenProps) => {
+  console.log("state",state.request)
   return {
     data:state.request,
   }
@@ -52,27 +53,32 @@ class Table extends Component {
   }
 
   componentWillMount() {
-    this.fetchData('/manage/acct/transfer/list', {}, { current: 1, pageSize: 10 });
+    this.fetchData({}, { current: 1, pageSize: 10 });
   }
 
   componentDidMount() {
-    const data = this.props.data.data;
+    const data = this.props.data;
     this.setState({
       dataSource: data
     })
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.state !== this.props.state) {
-      const data = nextProps.data.data;
+    if (nextProps.data !== this.props.data) {
+      const data = nextProps.data;
       this.setState({
         dataSource: data,
       })
     }
   }
 
-  fetchData(url, obj, pagination) {
-    this.props.dispatch(RequestAction.tableData(url, obj, pagination.current - 1, pagination.pageSize))
+  fetchData(obj, pagination) {
+    this.props.dispatch(RequestAction.tableData('/manage/acct/transfer/list', obj, pagination.current - 1, pagination.pageSize))
+    let data = {...this.state.dataSource};
+    data.loading=true;
+    this.setState({
+      dataSource:data
+    })
   }
 
   render() {
@@ -81,7 +87,7 @@ class Table extends Component {
     console.log("ddddddddd", data)
     return (
       <div>
-        <TableComponent columns={columns} dataSource={data} getData={this.fetchData} />
+        <TableComponent columns={columns} dataSource={data} fetchData={this.fetchData} />
       </div>
     );
   }

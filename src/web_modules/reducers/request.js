@@ -5,6 +5,7 @@ const TABLE_DATA = RequestAction.TABLE_DATA;
 const defaultState = {
     data: {},
     error: false,
+    loading: true,
 }
 
 const request = (state = defaultState, action) => {
@@ -12,14 +13,16 @@ const request = (state = defaultState, action) => {
         case TABLE_DATA.SUCCESS:
         const dataSource = action.payload;
         return {
+            data: dataSource,
             error: false,
-            data: dataSource
+            loading: false,
         };
         case TABLE_DATA.FAILURE:
         const errMsg = action.payload;
         return {
-            error: true,
             err: errMsg,
+            error: true,
+            loading: false
         };
         default:
         break;

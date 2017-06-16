@@ -4,7 +4,7 @@ import { API_ROOT } from '../config';
 export default (data, url, type) => {
   var headers = new Headers({
     "Content-Type": "application/json",
-    "x-auth-token": "0cd632bd-a5a3-4900-885f-fd8dfd9b290e"
+    "x-auth-token": "9d49c760-20e5-4237-bde4-3f26b8ba19a7"
   });
   return fetch(API_ROOT + url, {
     method: "POST",
@@ -23,7 +23,7 @@ export default (data, url, type) => {
       return response.json();
     })
     .then(res => {
-      if (res.retCode === "10005") {
+      if (res.retCode !== "10000") {
         window.localStorage.removeItem("x-auth-token");
         throw res.message;
       } else {
