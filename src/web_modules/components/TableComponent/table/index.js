@@ -17,10 +17,6 @@ export default class RichTable extends Component {
     }
 
     componentDidMount() {
-        // const fromParentProps = { ...this.props }
-        // this.setState({
-        //     fromParentProps: fromParentProps
-        // })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -78,13 +74,9 @@ export default class RichTable extends Component {
     }
 
     render() {
-        // const { fromParentProps, loading } = this.state;
-        // const dataSource = { ...fromParentProps.dataSource };
-        // console.log("fromParentProps", fromParentProps)
         const fromParentProps = this.props;
         const dataSource = { ...fromParentProps.dataSource.data }
         const currentState = { ...fromParentProps.dataSource }
-        console.log("dataSourcedddddd", dataSource);
         return (
             <div className="tabelInerContainer">
                 <div className="tableDropdown">
