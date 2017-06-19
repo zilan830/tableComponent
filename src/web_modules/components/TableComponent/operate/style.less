@@ -1,4 +1,32 @@
 .operateContainer{
     height: 60px;
     display: flex;
+    align-items:center;
+    .btnContainer{
+        display: flex;
+        align-items:center;
+        .btnMl{
+            margin-left: 10px;
+        }
+    }
+    .searchContainer{
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        align-items:center;
+    }
+}
+
+.hideBtnCon{
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    .hideBtn{
+        cursor: hand;
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+        &:last-child{
+            border-bottom: none;
+        }
+    }
 }

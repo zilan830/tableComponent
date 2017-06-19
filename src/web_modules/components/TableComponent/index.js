@@ -21,7 +21,7 @@ export default class TableComponent extends Component {
     return (
       <div className="tableContainer">
         <Filter searchColumns={this.props.searchColumns} search={this.props.search}/>
-        <Operate/>
+        <Operate operateColumns={this.props.operatrColumns || []}/>
         <RichTable {...this.props}/>
       </div>
     );

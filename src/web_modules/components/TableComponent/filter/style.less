@@ -1,7 +1,18 @@
-.filterContainer{
-    
+.filterContainer{ 
     .hasSelectedContainer{
     border-bottom: 2px solid rgba(30,48,84,0.10);
+    min-height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+        .hasSelected{
+            margin-right: 10px;
+        }
+        .filterBtn{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     }
     .filterInnerContainer{
        transition: all 0.3s;

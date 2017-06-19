@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Input } from "antd";
+import { Input, Button } from "antd";
 import "./style.less";
 
 export default class Filter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUnfolded: false,
+            isUnfolded: false,//是否展开
             list: []
         }
         this.filter = this.filter.bind(this);
@@ -42,6 +42,7 @@ export default class Filter extends Component {
         const passDataFunc = this.props.search;
         const list = [...this.state.list];
         let selected = [];
+        //把数值封装好传出去
         list.forEach(items => {
             let obj = {};
             obj[items.groupName] = items.selected;
@@ -90,7 +91,9 @@ export default class Filter extends Component {
     }
 
     render() {
+        //已选择内容框
         const selectedContent = this.state.list.map((items, index) => {
+            //有选择内容再继续
             if (items.selected.length > 0) {
                 return items.selected.map(item => {
                     return items.lables.map(obj => {
@@ -98,6 +101,7 @@ export default class Filter extends Component {
                             return (
                                 <span
                                     key={index}
+                                    className="hasSelected"
                                     onClick={this.onCancel.bind(null, items.groupName, obj.value)}
                                 >
                                     {items.groupName}:{obj.name}
@@ -108,6 +112,7 @@ export default class Filter extends Component {
                 })
             }
         });
+        //可选择内容
         let optionContent = [];
         this.state.list.map((items, index) => {
             let content = [];
@@ -122,14 +127,14 @@ export default class Filter extends Component {
                     </li>
                 )
             });
-            optionContent.push(<ul>{content}</ul>)
+            optionContent.push(<ul key={`opt${index}`}>{content}</ul>)
         })
         return (
             <div className="filterContainer">
-                <span onClick={this.filter}>
-                    筛选
-                </span>
                 <div className="hasSelectedContainer">
+                    <Button className="filterBtn" onClick={this.filter}>
+                        筛选
+                    </Button>
                     已选框:
                     {selectedContent}
                 </div>
