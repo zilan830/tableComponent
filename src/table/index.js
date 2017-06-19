@@ -13,8 +13,7 @@ const mapStateToProps = (state, oenProps) => {
 class Table extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      columns: [
+    const columns = [
         {
           title: "转出账户",
           dataIndex: "acctName",
@@ -45,11 +44,61 @@ class Table extends Component {
           dataIndex: "remark",
           key: "remark",
         }
-      ],
+      ];
+      const searchColumns=[{
+                groupName: "g1",
+                multi: true,
+                selected: [],
+                lables: [
+                    {
+                        name: "标签一",
+                        value: "1",
+                    },
+                    {
+                        name: "标签二",
+                        value: "2",
+                    },
+                    {
+                        name: "标签三",
+                        value: "3",
+                    },
+                    {
+                        name: "标签四",
+                        value: "4",
+                    },
+                ]
+            },
+            {
+                groupName: "g2",
+                multi: false,
+                selected: [],
+                lables: [
+                    {
+                        name: "标签一",
+                        value: 1,
+                    },
+                    {
+                        name: "标签二",
+                        value: 2,
+                    },
+                    {
+                        name: "标签三",
+                        value: 3,
+                    },
+                    {
+                        name: "标签四",
+                        value: 4,
+                    },
+                ]
+            }
+            ];
+    this.state = {
       dataSource: []
     }
+    this.columns = columns;
+    this.searchColumns = searchColumns;
     this.fetchData = this.fetchData.bind(this);
-    this.pagination = { current: 1, pageSize: 10 };
+    this.search = this.search.bind(this);
   }
 
   componentWillMount() {
@@ -81,13 +130,23 @@ class Table extends Component {
     })
   }
 
+  search(selectedData){
+    console.log("selectedData",selectedData);
+  }
+
+  onSelectChange(selectedRowKeys, selectedRows){
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log("selectedRows changed: ", selectedRows);
+  }
+
   render() {
-    const columns = [...this.state.columns];
     const data = { ...this.state.dataSource };
-    console.log("ddddddddd", data)
+    const rowSelection = {
+      onChange: this.onSelectChange
+    };
     return (
       <div>
-        <TableComponent columns={columns} dataSource={data} fetchData={this.fetchData} />
+        <TableComponent search={this.search} searchColumns={this.searchColumns} rowSelection={rowSelection} columns={this.columns} dataSource={data} fetchData={this.fetchData} />
       </div>
     );
   }

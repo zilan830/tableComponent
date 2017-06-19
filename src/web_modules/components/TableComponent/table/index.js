@@ -98,6 +98,7 @@ export default class RichTable extends Component {
                     dataSource={dataSource ? dataSource.dataList : []}
                     loading={currentState.loading}
                     onChange={this.pageOnChange}
+                    rowKey={record => record.id}
                     pagination={{
                         showQuickJumper: true,
                         showSizeChanger: true,

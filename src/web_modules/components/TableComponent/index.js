@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RichTable from "./table";
-import { message } from "antd";
+import Filter from "./filter";
+import Operate from "./operate";
 import './style.less';
 
 export default class TableComponent extends Component {
@@ -17,9 +18,10 @@ export default class TableComponent extends Component {
   }
 
   render() {
-    console.log("this.props",this.props)
     return (
       <div className="tableContainer">
+        <Filter searchColumns={this.props.searchColumns} search={this.props.search}/>
+        <Operate/>
         <RichTable {...this.props}/>
       </div>
     );

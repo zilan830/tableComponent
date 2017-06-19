@@ -22,7 +22,7 @@ const config = {
     filename: 'bundle.js',
   },
   //devtool相关说明，https://segmentfault.com/a/1190000004280859，可自己按照实际情况调整
-  devtool: "#eval",
+  devtool: "#inline-source-map",
   plugins: [
     new webpack.DllReferencePlugin({
       context: __dirname,
