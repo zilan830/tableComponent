@@ -8,6 +8,7 @@ export default class RichTable extends Component {
         super(props);
         this.state = {
             fromParentProps: {},
+            columnsVisible:false,
             columns: this.props.columns || []
         }
         this.pageOnChange = this.pageOnChange.bind(this);
@@ -80,8 +81,15 @@ export default class RichTable extends Component {
         return (
             <div className="tabelInerContainer">
                 <div className="tableDropdown">
-                    <Dropdown overlay={this.renderMenu()} trigger={['click']}>
-                        <Icon type="down-circle-o" />
+                    <Dropdown 
+                    overlay={this.renderMenu()} 
+                    visible={this.state.columnsVisible}
+                    onVisibleChange={visible => {
+                    this.setState({ columnsVisible: visible });
+                    }}>
+                        <div className="tableDrop">
+                            <Icon type="ellipsis" />
+                        </div>
                     </Dropdown>
                 </div>
                 <Table

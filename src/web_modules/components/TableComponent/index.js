@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import RichTable from "./table";
 import Filter from "./filter";
 import Operate from "./operate";
@@ -10,18 +10,28 @@ export default class TableComponent extends Component {
   }
 
   componentDidMount() {
-    
+
   }
 
   componentWillReceiveProps(nextProps) {
-   
+
   }
 
   render() {
     return (
       <div className="tableContainer">
-        <Filter searchColumns={this.props.searchColumns} search={this.props.search}/>
-        <Operate operateColumns={this.props.operatrColumns || []}/>
+        {
+          this.props.searchForm ?
+            <Filter searchForm={this.props.searchForm} search={this.props.search}/>
+            :
+            null
+        }
+        {
+          this.props.operateColumns ?
+            <Operate operateColumns={this.props.operateColumns || []}/>
+            :
+            null
+        }
         <RichTable {...this.props}/>
       </div>
     );

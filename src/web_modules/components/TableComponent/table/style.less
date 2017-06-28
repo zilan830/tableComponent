@@ -2,12 +2,27 @@
     position: relative;
     .tableDropdown{
         position: absolute;
-        width: 16px;
-        height: 16px;
-        top: 20px;
+        width: 40px;
+        height: 40px;
+        top: 0px;
         right: 10px;
         z-index: 999;
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .tableDrop{
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #a5acbb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i{
+                color: #a5acbb;
+                font-weight: bold;
+            }
+        }
     }
 }
 

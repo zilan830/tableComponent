@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV
 
 const config = {
   target: 'web',
-  entry: './src/index.js',
+  entry: './src/tabs.js',
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['react-hot', 'babel-loader?cacheDirectory'], exclude: /node_modules/ },

@@ -1,23 +1,79 @@
-.filterContainer{ 
-    .hasSelectedContainer{
-    border-bottom: 2px solid rgba(30,48,84,0.10);
-    min-height: 60px;
-    position: relative;
+.filterContainer {
+  .filterTabsContainer {
+    height: 60px;
+    border-bottom: 2px solid rgba(30, 48, 84, 0.10);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-        .hasSelected{
+    .tabSearchContainer {
+      height: 28px;
+    }
+    .tabsContainer {
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+      width: 658px;
+      >span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        cursor: hand;
+      }
+      .tabsInnerContainer {
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+        width: 618px;
+        position: relative;
+        .tabsUlContainer {
+          display: flex;
+          height: 100%;
+          position: absolute;
+          top:0;
+          left: 0;
+          transition: all 0.3s;
+          .tabItem {
+            font-size: 14px;
+            color: rgba(30, 48, 84, 0.40);
             margin-right: 10px;
+            padding: 0 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: hand;
+            border-bottom: 2px solid transparent;
+            &.selected {
+              border-bottom: 2px solid #5990ff;
+              transition: all 0.3s;
+            }
+          }
         }
-        .filterBtn{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
+      }
     }
-    .filterInnerContainer{
-       transition: all 0.3s;
-       opacity: 0;
-       max-height: 0;
-       border-bottom: 2px solid rgba(30,48,84,0.10);
+  }
+  .filterDet {
+    position: relative;
+    .hasSelectedContainer {
+      border-bottom: 2px solid rgba(30, 48, 84, 0.10);
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      .hasSelected {
+        margin-right: 10px;
+      }
     }
+    .filterInnerContainer {
+      transition: all 0.3s;
+      opacity: 0;
+      max-height: 0;
+      border-bottom: 2px solid rgba(30, 48, 84, 0.10);
+    }
+    .filterBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+    }
+  }
 }

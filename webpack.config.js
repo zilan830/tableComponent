@@ -9,7 +9,7 @@ const version = String(require("./package.json").version);
 const publicPath = './' + version + '/';
 
 const config = {
-  entry: './src/index.js',
+  entry: './src/tabs.js',
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel-loader?cacheDirectory'], exclude: /node_modules/ },
