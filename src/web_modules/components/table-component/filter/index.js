@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import {Input, Button, DatePicker, Select, Cascader} from "antd";
-import TabContainer from './TabsComponent';
+import {Input, Button, DatePicker, Select, Cascader, Tag} from "antd";
+import TabContainer from './tabsComponent';
 import "./style.less";
 const Search = Input.Search;
 const {RangePicker} = DatePicker;
@@ -145,7 +145,7 @@ export default class Filter extends Component {
   }
 
   //以选择内容框
-  hasSelectedContent(list,listForm){
+  hasSelectedContent(list, listForm) {
     //已选择内容框
     const selectedContent = listForm.map((items, index) => {
       //有选择内容再继续
@@ -171,7 +171,7 @@ export default class Filter extends Component {
                   className="hasSelected"
                   onClick={this.onCancel.bind(null, items.selected, items.groupName, items.type)}
                 >
-                    {items.groupName}:{selected.join("/")}
+                  <Tag closable>{items.groupName}:{selected.join("/")}</Tag>
                 </span>
               );
             break;
@@ -198,7 +198,9 @@ export default class Filter extends Component {
                         className="hasSelected"
                         onClick={this.onCancel.bind(null, obj.value, items.groupName, items.type)}
                       >
+                        <Tag className="tag" closable>
                       {items.groupName}:{obj.label}
+                        </Tag>
                       </span>
                     )
                 })
@@ -212,13 +214,14 @@ export default class Filter extends Component {
   }
 
   //可选择内容
-  selectContent(list,listForm){
+  selectContent(list, listForm) {
     let optionContent = [];
     let tabData = {};
     let searchData = {};
     //遍历表单，根据类型返回
     listForm.map((items, index) => {
       let content = [];
+      let nameContent = [];
       if (items.topFilter) {
         switch (items.type) {
           case "tabs":
@@ -232,15 +235,15 @@ export default class Filter extends Component {
       } else {
         const name = items.groupName;
         const type = items.type;
-        content.push(<li key={name}>{name}:</li>);
+        nameContent.push(<div key={name} className="filterName">{name}:</div>);
         switch (type) {
           case "labels":
             items.options.map((item, index) => {
               content.push(
                 <li
+                  className={items.selected.includes(item.value) ? "filterLabel active" : "filterLabel"}
                   key={`${type}-${index}`}
-                  onClick={() => this.onSelect(item.value, name, type)}
-                  style={items.selected.includes(item.value) ? {"color": "blue"} : {}}>
+                  onClick={() => this.onSelect(item.value, name, type)}>
                   {item.label}
                 </li>
               )
@@ -297,6 +300,16 @@ export default class Filter extends Component {
           case "date":
             const selected = items.selected;
             const selectedFirst = selected[0] || "";
+            items.options.map((item, index) => {
+              content.push(
+                <li
+                  className={items.selected.includes(item.value) ? "filterLabel active" : "filterLabel"}
+                  key={`${type}-${index}`}
+                  onClick={() => this.onSelect(item.value, name, type)}>
+                  {item.label}
+                </li>
+              )
+            });
             content.push(
               <li
                 key={`${type}-${index}`}>
@@ -310,10 +323,15 @@ export default class Filter extends Component {
             );
             break;
         }
-        optionContent.push(<ul key={`opt${index}`}>{content}</ul>)
+        optionContent.push(
+          <div className="filterConditionsCon">
+            {nameContent}
+            <ul key={`opt${index}`}>{content}</ul>
+          </div>
+        )
       }
     });
-    const wholeContent={
+    const wholeContent = {
       optionContent,
       tabData,
       searchData
@@ -326,7 +344,8 @@ export default class Filter extends Component {
     const listForm = list.fields || [];
     const hasSelectedContent = this.hasSelectedContent(list, listForm);
     const {optionContent, tabData, searchData} = this.selectContent(list, listForm);
-    const topContent = <TabContainer tabData={tabData} handleTabs={this.onSelect} searchData={searchData} onSearch={this.onSelect}/>;
+    const topContent = <TabContainer tabData={tabData} handleTabs={this.onSelect} searchData={searchData}
+                                     onSearch={this.onSelect}/>;
     return (
       <div className="filterContainer">
         {topContent}
@@ -337,11 +356,10 @@ export default class Filter extends Component {
           <div
             className="filterInnerContainer"
             style={this.state.isUnfolded ? {"opacity": 1, "maxHeight": "1200px"} : {}}>
-            筛选框:
             {optionContent}
           </div>
-          <div className="hasSelectedContainer">
-
+          <div className="hasSelectedContainer"
+               style={this.state.isUnfolded ? {} : {"opacity": 1, "minHeight": "60px"}}>
             已选框:
             {hasSelectedContent}
           </div>

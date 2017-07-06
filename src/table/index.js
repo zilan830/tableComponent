@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TableComponent from '../web_modules/components/TableComponent';
+import TableComponent from '../web_modules/components/table-component';
 import {connect} from "react-redux";
 import {RequestAction} from "../web_modules/actions";
 
@@ -67,6 +67,18 @@ class Table extends Component {
             {
               label: "就是没有你的财产",
               value: "money4",
+            },
+            {
+              label: "就是没有你的财产",
+              value: "money5",
+            },
+            {
+              label: "就是没有你的财产",
+              value: "money6",
+            },
+            {
+              label: "就是没有你的财产",
+              value: "money7",
             }
           ]
         },
@@ -185,7 +197,17 @@ class Table extends Component {
           selected: [],
           metas: {
             format: "YYYY-MM-DD",
-          }
+          },
+          options:[
+            {
+              label: "全部",
+              value: 1,
+            },
+            {
+              label: "本月",
+              value: 2,
+            }
+          ]
         },
         {
           groupName: "g7",
@@ -323,7 +345,7 @@ class Table extends Component {
   }
 
   fetchData(obj, pagination) {
-    this.props.dispatch(RequestAction.tableData('/manage/acct/transfer/list', obj, pagination.current - 1, pagination.pageSize))
+    this.props.dispatch(RequestAction.tableData('', obj, pagination.current - 1, pagination.pageSize))
     let data = {...this.state.dataSource};
     data.loading = true;
     this.setState({

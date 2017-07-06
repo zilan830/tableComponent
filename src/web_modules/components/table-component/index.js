@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import RichTable from "./table";
+import RichTable from "./single-table";
 import Filter from "./filter";
 import Operate from "./operate";
 import './style.less';

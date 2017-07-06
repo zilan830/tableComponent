@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Input} from "antd";
-import Tab from './tabs';
+import TabsFilter from './TabsFilter';
 import "../style.less";
 const Search = Input.Search;
 
@@ -10,7 +10,7 @@ export default ({tabData,searchData,handleTabs,onSearch}) => {
       <div className="filterTabsContainer">
         {
           tabData.hasOwnProperty("options") ?
-            <Tab tabData={tabData} handleTabs={handleTabs}/>
+            <TabsFilter tabData={tabData} handleTabs={handleTabs}/>
             :
             null
         }

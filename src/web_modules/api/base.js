@@ -4,7 +4,7 @@ import { API_ROOT } from '../config';
 export default (data, url, type) => {
   var headers = new Headers({
     "Content-Type": "application/json",
-    "x-auth-token": "016755e3-79ab-44b1-9d90-b880b57d521b"
+    "x-auth-token": "7452d25e-ff8e-485c-96fb-36ba2aff94b5"
   });
   return fetch(API_ROOT + url, {
     method: "POST",

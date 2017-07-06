@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Input, Button, Dropdown} from "antd";
+import {Input, Button, Dropdown, Icon} from "antd";
 import "./style.less";
 const Search = Input.Search;
 
@@ -42,9 +42,11 @@ export default class Operate extends Component {
         const operateFunc = item.func;
         return (
           <Button
+            height="28px"
             key={`show${index}`}
             onClick={operateFunc.bind(this)}
-            className={type === 'single' && index === 0 ? "btnMl blueBtn" : "btnMl"}
+            type={type === 'single' && index === 0 ? "primary" : ""}
+            className="btnMl"
           >
             {item.name}
           </Button>
@@ -66,7 +68,7 @@ export default class Operate extends Component {
             trigger={['click']}
 
           >
-            <Button className="btnMl">下拉</Button>
+            <Button className="btnMl dropDown"><Icon style={{"fontSize": "20px"}} type="down"/></Button>
           </Dropdown>)
       }
     }
