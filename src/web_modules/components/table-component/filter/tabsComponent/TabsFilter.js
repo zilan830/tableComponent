@@ -81,13 +81,13 @@ export default class TabsFilter extends Component {
   }
 
   onClick(index, value, groupName) {
-    let left = this.state.left;
+    let { left, allWidth } = this.state;
     const offsetLeft = document.getElementById(index).getBoundingClientRect().left;
     const offsetRight = document.getElementById(index).getBoundingClientRect().right;
     const width = document.getElementById(index).getBoundingClientRect().width;
     const {staticLeft, staticRight} = this.state;
 
-    if (offsetRight > 660) {
+    if (offsetRight > 660 && allWidth > 618) {
       left = left + offsetLeft - offsetRight;
     }else if (staticLeft > offsetLeft){
       left = left + offsetRight - offsetLeft;
@@ -96,17 +96,19 @@ export default class TabsFilter extends Component {
     }
 
     console.log("offsetLeft", offsetLeft, 'offsetRight', offsetRight, 'width', width)
-    let {data} = this.state;
-    let options = [...data.options];
-    options.forEach(item => {
-      item.selected = false;
-    });
-    for (let item of options) {
-      if (item.value === value) {
-        item.selected = true;
-      }
-    }
-    data.options = options;
+    const {data} = this.state;
+    // let options = [...data.options];
+    data.selected = [];
+    data.selected.push(value);
+    // options.forEach(item => {
+    //   item.selected = false;
+    // });
+    // for (let item of options) {
+    //   if (item.value === value) {
+    //     item.selected = true;
+    //   }
+    // }
+    // data.options = options;
     this.setState({
       data: data,
       left:left
@@ -125,7 +127,7 @@ export default class TabsFilter extends Component {
             id={index}
             key={index}
             onClick={() => this.onClick(index, item.value, data.groupName)}
-            className={item.selected ? "tabItem selected" : "tabItem"}>
+            className={data.selected[0] === item.value ? "tabItem selected" : "tabItem"}>
             {item.label}
           </li>
         )

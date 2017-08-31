@@ -31,7 +31,6 @@ export default class RichTable extends Component {
         console.log("page", pagination, filter, sorter)
         const fetchData = this.props.fetchData;
         fetchData({}, pagination);
-
     }
 
     //渲染选择栏
@@ -46,7 +45,7 @@ export default class RichTable extends Component {
                     }
                 </li>
             )
-        })
+        });
         return (<ul className="tableDropContainer">{menu}</ul>);
     }
 

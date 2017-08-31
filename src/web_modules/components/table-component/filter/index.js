@@ -101,10 +101,6 @@ export default class Filter extends Component {
               }
               items.selected = Array.from(selected);
               break;
-            } else {
-              items.selected = [];
-              items.selected.push(value);
-              break;
             }
         }
         break;
@@ -197,7 +193,7 @@ export default class Filter extends Component {
                         key={index}
                         className="hasSelected"
                         onClick={this.onCancel.bind(null, obj.value, items.groupName, items.type)}
-                      >
+                      >sle
                         <Tag className="tag" closable>
                       {items.groupName}:{obj.label}
                         </Tag>
